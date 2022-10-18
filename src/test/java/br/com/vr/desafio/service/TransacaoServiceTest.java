@@ -1,6 +1,6 @@
 package br.com.vr.desafio.service;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -46,7 +46,6 @@ class TransacaoServiceTest {
 
 	private List<Cartao> lista2;
 
-	
 	private List<Cartao> lista;
 
 	private DadosDTO cartao2;
@@ -58,7 +57,7 @@ class TransacaoServiceTest {
 		cartao.setNumeroCartao("123456789012");
 		cartao.setSenha("1234");
 		cartao.setValor(new BigDecimal(100));
-		
+
 		this.cartao2 = new DadosDTO();
 		cartao2.setNumeroCartao("123456789012");
 		cartao2.setSenha("123");
@@ -67,12 +66,11 @@ class TransacaoServiceTest {
 		this.entity = new Cartao();
 		this.entity.setNumeroCartao("123456789012");
 		this.entity.setSenha("1234");
-		
-				this.transacao = new Transacao();
+
+		this.transacao = new Transacao();
 		this.transacao.setCartao(this.entity);
 		this.transacao.setValor(new BigDecimal(100));
-		
-		
+
 		this.lista2 = new ArrayList<>();
 		this.lista2.add(new Cartao("123456789012", "1234"));
 	}
@@ -82,14 +80,13 @@ class TransacaoServiceTest {
 
 		assertThrows(Exception.class, () -> service.efetuarTransacao(cartao));
 	}
-	
+
 	@Test()
 	void deveRetornarErro2RealizarTransacao() throws Exception {
 		when(this.cartaoRepository.findByNumeroCartao("123456789012")).thenReturn(this.lista);
 		assertThrows(Exception.class, () -> service.efetuarTransacao(cartao));
 	}
-	
-	
+
 	@Test()
 	void deveRealizarTransacaoOk() throws Exception {
 		when(this.cartaoRepository.findByNumeroCartao("123456789012")).thenReturn(this.lista);
